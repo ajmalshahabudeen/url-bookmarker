@@ -21,14 +21,26 @@ const items = [
     {
       label: "Documentation",
       icon: "i-heroicons-book-open",
+      click: () => {
+        navigateTo("https://github.com/ajmalshahabudeen/url-bookmarker", {
+          external: true,
+          open: { target: "_blank" },
+        });
+      }
     },
     {
-      label: "Changelog",
+      label: "Auther",
       icon: "i-heroicons-megaphone",
+      click: () =>
+        navigateTo("https://ajmalshahabudeen.vercel.app", {
+          external: true,
+          open: { target: "_blank" },
+        }),
     },
     {
       label: "Status",
       icon: "i-heroicons-signal",
+      to: "/status",
     },
   ],
   [
@@ -47,7 +59,6 @@ watch(status, () => {
     show.value = true;
   }
 });
-
 
 onMounted(() => {
   if (status.value === "unauthenticated") {
