@@ -1,12 +1,13 @@
 <script setup lang="ts">
 const { signOut, status, data } = useAuth();
 const show = ref(false);
-const userData = computed(() => data.value?.user);
+// const userData = computed(() => data.value?.user);
+const userEmail = ref("");
 
-const items = [
+const items:any = [
   [
     {
-      label: userData.value?.email || "User",
+      label: userEmail || "User",
       slot: "account",
       disabled: true,
     },
@@ -57,6 +58,7 @@ watch(status, () => {
     show.value = false;
   } else {
     show.value = true;
+    userEmail.value = data.value?.user?.email as string
   }
 });
 
@@ -65,6 +67,7 @@ onMounted(() => {
     show.value = false;
   } else {
     show.value = true;
+    userEmail.value = data.value?.user?.email as string
   }
 });
 </script>

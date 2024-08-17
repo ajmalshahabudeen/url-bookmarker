@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-5 items-center justify-center min-h-[90vh]">
+  <div class="flex flex-col gap-5 items-center justify-center min-h-[90vh] mx-5">
     <div
       class="flex flex-col gap-5 border-b-8 border border-t-8 px-5 py-10 border-primary rounded-xl shadow-2xl"
     >
