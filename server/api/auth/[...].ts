@@ -4,8 +4,9 @@ import Github from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import { db } from "~/utils/db";
-import { user } from '~/drizzle/schema';
+import { user } from "~/drizzle/schema";
 import { eq } from "drizzle-orm";
+import bcrypt from "bcrypt";
 
 export default NuxtAuthHandler({
   adapter: DrizzleAdapter(db) as any,
@@ -40,16 +41,8 @@ export default NuxtAuthHandler({
           console.log("Invalid credentials");
           return null;
         }
-        console.log("Login success");
-
-        const user = await findUserByEmail(credentials.email, credentials.password);
-
-        return {
-          email: credentials.email,
-          name: "Test",
-          image:
-            "https://github.com/withastro/astro/blob/main/assets/withastro.jpg?raw=true",
-        };
+        console.log("checking credentials");
+        return await findUserByEmail(credentials.email, credentials.password);
       },
     }),
   ],
@@ -70,7 +63,7 @@ export default NuxtAuthHandler({
       return session;
     },
     /* on JWT token creation or mutation */
-    async jwt({ token, user, account, profile, isNewUser }) {
+    async jwt({ token, user, account, profile }) {
       return token;
     },
   },
@@ -79,5 +72,25 @@ export default NuxtAuthHandler({
 const findUserByEmail = async (email: string, pasword: string) => {
   const userData = await db.query.user.findFirst({
     where: eq(user.email, email),
-  })
-}
+  });
+
+  if (!userData) {
+    console.log("User not found");
+    return null;
+  } else {
+    const userPasswordHash = userData?.password as string;
+    const passwordValidity = bcrypt.compareSync(pasword, userPasswordHash);
+
+    if (!passwordValidity) {
+      console.log("Invalid password");
+      return null;
+    } else {
+      return {
+        id: userData.id,
+        name: userData.name,
+        email: userData.email,
+        image: userData.image,
+      };
+    }
+  }
+};

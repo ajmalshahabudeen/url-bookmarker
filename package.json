@@ -27,6 +27,8 @@
     "vue": "latest"
   },
   "devDependencies": {
+    "@iconify-json/ic": "^1.1.18",
+    "@iconify-json/logos": "^1.1.44",
     "@iconify-json/material-symbols": "^1.1.87",
     "autoprefixer": "^10.4.20",
     "drizzle-kit": "^0.24.0",

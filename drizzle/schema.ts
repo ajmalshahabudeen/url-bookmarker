@@ -1,7 +1,13 @@
-import { pgTable, unique, text, timestamp, foreignKey, primaryKey, integer, boolean } from "drizzle-orm/pg-core"
+import { pgTable, foreignKey, text, timestamp, unique, primaryKey, integer, boolean } from "drizzle-orm/pg-core"
   import { sql } from "drizzle-orm"
 
 
+
+export const session = pgTable("session", {
+	sessionToken: text("sessionToken").primaryKey().notNull(),
+	userId: text("userId").notNull().references(() => user.id, { onDelete: "cascade" } ),
+	expires: timestamp("expires", { mode: 'string' }).notNull(),
+});
 
 export const user = pgTable("user", {
 	id: text("id").primaryKey().notNull(),
@@ -9,17 +15,12 @@ export const user = pgTable("user", {
 	email: text("email"),
 	emailVerified: timestamp("emailVerified", { mode: 'string' }),
 	image: text("image"),
+	password: text("password"),
 },
 (table) => {
 	return {
 		userEmailUnique: unique("user_email_unique").on(table.email),
 	}
-});
-
-export const session = pgTable("session", {
-	sessionToken: text("sessionToken").primaryKey().notNull(),
-	userId: text("userId").notNull().references(() => user.id, { onDelete: "cascade" } ),
-	expires: timestamp("expires", { mode: 'string' }).notNull(),
 });
 
 export const bookmark = pgTable("bookmark", {

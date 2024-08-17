@@ -1,13 +1,9 @@
 <template>
-  <p class="text-3xl font-matemasie">
-    BookMarker
-  </p>
+  <NuxtLink to="/">
+    <p class="text-3xl font-matemasie">BookMarker</p>
+  </NuxtLink>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup></script>
 
-</script>
-
-<style>
-
-</style>
+<style></style>

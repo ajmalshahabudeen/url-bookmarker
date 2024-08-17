@@ -40,6 +40,13 @@ const items = [
   ],
 ];
 
+watch(status, () => {
+  if (status.value === "unauthenticated") {
+    show.value = false;
+  } else {
+    show.value = true;
+  }
+});
 
 
 onMounted(() => {
