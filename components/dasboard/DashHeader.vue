@@ -12,6 +12,7 @@
         variant="outline"
         icon="material-symbols:refresh-rounded"
         label="Refresh"
+        @click="BookCatStore.getBookmarkCategory('/test')"
       />
       <UButton
         variant="outline"
@@ -23,11 +24,18 @@
         icon="mdi:plus-circle-outline"
         label="Add Category"
       />
+      <p>{{ route.path }}</p>
     </UContainer>
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import {useGetBookmarksCategoryStore} from '~/stores/useGetBookmarksCategoryStore'
+const BookCatStore = useGetBookmarksCategoryStore()
+
+const route = useRoute()
+
+</script>
 
 <style>
 .no-scrollbar::-webkit-scrollbar {

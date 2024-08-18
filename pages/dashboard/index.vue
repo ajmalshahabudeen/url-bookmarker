@@ -5,14 +5,15 @@
      <div v-for="Category, index in CategoryData">
       {{ Category.categoryName }}
      </div>
-    <!-- <pre>{{ CategoryData }}</pre> -->
+    <pre>{{ BookCatStore.categoryData }}</pre>
   </div>
 </template>
 
 <script lang="ts" setup>
 import DashHeader from '~/components/dasboard/DashHeader.vue';
 import { AddBookmarkCategory, GetBookmarkCategory } from '~/utils/bookmark/category';
-
+import {useGetBookmarksCategoryStore} from '~/stores/useGetBookmarksCategoryStore'
+const BookCatStore = useGetBookmarksCategoryStore()
 const Add = async () => {
   await AddBookmarkCategory("test", "/test")
 }

@@ -15,6 +15,8 @@ export default defineNuxtConfig({
     "@nuxt/ui",
     "@nuxt/fonts",
     "@sidebase/nuxt-auth",
+    "@pinia/nuxt",
+    "@pinia-plugin-persistedstate/nuxt",
   ],
   colorMode: {
     preference: "system", // default value of $colorMode.preference
