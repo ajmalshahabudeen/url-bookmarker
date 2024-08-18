@@ -1,7 +1,7 @@
 import { getServerSession } from "#auth";
 import { bookmarkcategory, user } from "~/drizzle/schema";
 import { db } from "~/utils/db";
-import { and, eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
 export default defineEventHandler(async (event) => {
   const session = await getServerSession(event);
@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
 
   const body = await readBody(event);
   const { categoryName, path } = body as { categoryName: string; path: string };
-
+  console.log({ categoryName, path });
   // console.log(session)
 
   if (!session) {
