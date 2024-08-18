@@ -9,7 +9,11 @@ export default defineEventHandler(async (event) => {
   const { name, email } = session?.user as { name: string, email: string }
 
   const query = getQuery(event)
-  const { path } = query as { path: string }
+  let { path } = query as { path: string }
+  if (path.endsWith('/')) {
+    const newPath = path.slice(0, -1);
+    path = newPath;
+  }
   console.log(path)
 
   // console.log(session)

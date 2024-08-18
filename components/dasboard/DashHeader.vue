@@ -12,7 +12,7 @@
         variant="outline"
         icon="material-symbols:refresh-rounded"
         label="Refresh"
-        @click="BookCatStore.getBookmarkCategory('/test')"
+        @click="refresh"
       />
       <UButton
         variant="outline"
@@ -24,7 +24,7 @@
         icon="mdi:plus-circle-outline"
         label="Add Category"
       />
-      <p>{{ route.path }}</p>
+      <!-- <p>{{ route.path }}</p> -->
     </UContainer>
   </div>
 </template>
@@ -34,6 +34,16 @@ import {useGetBookmarksCategoryStore} from '~/stores/useGetBookmarksCategoryStor
 const BookCatStore = useGetBookmarksCategoryStore()
 
 const route = useRoute()
+const path = route.path
+
+onMounted(() => {
+  BookCatStore.getBookmarkCategory(path)
+})
+
+const refresh = () => {
+  BookCatStore.$reset()
+  BookCatStore.getBookmarkCategory(path)
+}
 
 </script>
 
