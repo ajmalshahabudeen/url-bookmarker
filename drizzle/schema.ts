@@ -34,6 +34,7 @@ export const bookmarkcategory = pgTable("bookmarkcategory", {
 	id: text("id").primaryKey().notNull(),
 	categoryName: text("category_name"),
 	categoryPath: text("category_path"),
+	userId: text("user_id"),
 });
 
 export const verificationToken = pgTable("verificationToken", {
