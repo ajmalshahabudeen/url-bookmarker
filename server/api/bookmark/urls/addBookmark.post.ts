@@ -15,6 +15,11 @@ export default defineEventHandler(async (event) => {
   const categoryName = pathArr[pathArr.length - 1];
   // console.log(session)
 
+  let newBookmarkUrl = bookmarkUrl;
+  if (!bookmarkUrl.startsWith("http")) {
+    newBookmarkUrl = "https://" + bookmarkUrl;
+  }
+
   if (!session) {
     throw createError({
       statusCode: 401,
@@ -41,7 +46,7 @@ export default defineEventHandler(async (event) => {
       .values({
         id: crypto.randomUUID(),
         bookmarkedCategory: categoryName,
-        bookmarkedUrl: bookmarkUrl,
+        bookmarkedUrl: newBookmarkUrl,
         userId: userID[0].id,
       })
       .returning({ id: bookmark.id });
