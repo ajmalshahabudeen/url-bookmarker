@@ -1,5 +1,5 @@
 import { getServerSession } from "#auth";
-import { bookmark, user } from "~/drizzle/schema";
+import { bookmark, bookmarkcategory, user } from "~/drizzle/schema";
 import { db } from "~/utils/db";
 import { eq } from "drizzle-orm";
 
@@ -8,11 +8,16 @@ export default defineEventHandler(async (event) => {
   const { name, email } = session?.user as { name: string; email: string };
 
   const body = await readBody(event);
-  const { categoryPath, bookmarkUrl } = body as { categoryPath: string; bookmarkUrl: string };
+  const { categoryPath, bookmarkUrl } = body as {
+    categoryPath: string;
+    bookmarkUrl: string;
+  };
   console.log({ categoryPath, bookmarkUrl });
-  let pathArr = categoryPath.split('/');
-  categoryPath.endsWith('/') && pathArr.pop(); 
+  let pathArr = categoryPath.split("/");
+  categoryPath.endsWith("/") && pathArr.pop();
+  const newCategoryPath = pathArr.join("/");
   const categoryName = pathArr[pathArr.length - 1];
+  // console.log({ categoryName, pathArr, newCategoryPath });
   // console.log(session)
 
   let newBookmarkUrl = bookmarkUrl;
@@ -40,18 +45,31 @@ export default defineEventHandler(async (event) => {
         statusMessage: "User not found",
       });
     }
-
     const categoryID = await db
+      .select({ id: bookmarkcategory.id })
+      .from(bookmarkcategory)
+      .where(eq(bookmarkcategory.categoryPath, newCategoryPath));
+
+    console.log(categoryID);
+
+    if (!categoryID) {
+      throw createError({
+        statusCode: 404,
+        statusMessage: "Category not found",
+      });
+    }
+
+    const bookmarkID = await db
       .insert(bookmark)
       .values({
         id: crypto.randomUUID(),
-        bookmarkedCategory: categoryName,
+        bookmarkedCategory: categoryID[0].id,
         bookmarkedUrl: newBookmarkUrl,
         userId: userID[0].id,
       })
       .returning({ id: bookmark.id });
 
-    return categoryID;
+    return bookmarkID;
   } catch (error) {
     throw createError({
       statusCode: 500,

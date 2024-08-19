@@ -26,6 +26,7 @@ export const GetBookmarks = async (path: string) => {
         method: "GET",
       }
     );
+    console.log("data", data);
     return data;
   } catch (error) {
     return null;

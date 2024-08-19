@@ -1,53 +1,54 @@
-import { getServerSession } from '#auth'
-import { bookmarkcategory, user } from '~/drizzle/schema'
-import { db } from '~/utils/db'
-import { and, eq } from 'drizzle-orm';
+import { getServerSession } from "#auth";
+import { bookmarkcategory, user } from "~/drizzle/schema";
+import { db } from "~/utils/db";
+import { and, eq } from "drizzle-orm";
 
 export default defineEventHandler(async (event) => {
+  const session = await getServerSession(event);
+  const { name, email } = session?.user as { name: string; email: string };
 
-  const session = await getServerSession(event)
-  const { name, email } = session?.user as { name: string, email: string }
-
-  const query = getQuery(event)
-  let { path } = query as { path: string }
-  if (path.endsWith('/')) {
+  const query = getQuery(event);
+  let { path } = query as { path: string };
+  if (path.endsWith("/")) {
     const newPath = path.slice(0, -1);
     path = newPath;
   }
-  console.log(path)
+  console.log(path);
 
   // console.log(session)
 
   if (!session) {
     throw createError({
       statusCode: 401,
-      statusMessage: 'Unauthorized',
-    })
+      statusMessage: "Unauthorized",
+    });
   }
-  
-  try {
 
+  try {
     const userID = await db
       .select({ id: user.id })
       .from(user)
-      .where(eq(user.email, email))
-      // console.log(userID)
+      .where(eq(user.email, email));
+    // console.log(userID)
 
-      if (!userID) {
-        throw createError({
-          statusCode: 404,
-          statusMessage: 'User not found',
-        })
-      }
+    if (!userID) {
+      throw createError({
+        statusCode: 404,
+        statusMessage: "User not found",
+      });
+    }
 
     const listOfCategory = await db.query.bookmarkcategory.findMany({
       where: and(
         eq(bookmarkcategory.userId, userID[0].id),
         eq(bookmarkcategory.categoryPath, path)
       ),
-    })
+    });
+    if (!listOfCategory) {
+      return "No category found";
+    }
 
-    return listOfCategory 
+    return listOfCategory;
     // throw createError({
     //   statusCode: 500,
     //   statusMessage: 'Internal Server Error',
@@ -55,9 +56,9 @@ export default defineEventHandler(async (event) => {
   } catch (error) {
     throw createError({
       statusCode: 500,
-      statusMessage: 'Internal Server Error',
-    })
+      statusMessage: "Internal Server Error",
+    });
   }
 
-  return 'Hello Nitro'
-})
+  return "Hello Nitro";
+});

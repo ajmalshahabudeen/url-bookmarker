@@ -32,7 +32,7 @@ export const useUrlsStore = defineStore({
         this.loading = false;
         this.errorMessage = "Error adding bookmark url";
         return;
-      }
+      } 
       this.loading = false;
       this.getBookmarkUrl(categoryPath);
     },
