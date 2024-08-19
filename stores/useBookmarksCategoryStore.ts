@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { AddBookmarkCategory, GetBookmarkCategory } from "~/utils/bookmark/category";
+import { AddBookmarkCategory, DeleteBookmarkCategory, GetBookmarkCategory, UpdateBookmarkCategory } from "~/utils/bookmark/category";
 
 export const useGetBookmarksCategoryStore = defineStore({
   id: "useGetBookmarksCategoryStore",
@@ -33,6 +33,24 @@ export const useGetBookmarksCategoryStore = defineStore({
         return;
       }
       this.loading = false;
+      this.getBookmarkCategory(path);
+    },
+    async updateBookmarkCategory(id: string, categoryName: string, path: string) {
+      const res = await UpdateBookmarkCategory(id, categoryName);
+      if (!res) {
+        this.error = true;
+        this.errorMessage = "Error updating bookmark category";
+        return;
+      }
+      this.getBookmarkCategory(path);
+    },
+    async deleteBookmarkCategory(id: string, path: string) {
+      const res = await DeleteBookmarkCategory(id);
+      if (!res) {
+        this.error = true;
+        this.errorMessage = "Error deleting bookmark category";
+        return;
+      }
       this.getBookmarkCategory(path);
     },
   },

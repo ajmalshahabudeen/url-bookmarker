@@ -29,6 +29,7 @@
             label="Options"
             variant="ghost"
             trailing-icon="i-heroicons-chevron-down-20-solid"
+            @click="CatOptionID = Category.id"
           />
         </UDropdown>
       </div>
@@ -86,7 +87,7 @@
               <h1 class="text-3xl font-bold">Delete Url</h1>
               <div class="flex items-center w-full justify-end gap-5">
                 <UButton
-                  label="Close" 
+                  label="Close"
                   class="mt-5"
                   type="button"
                   @click="isDelUrlOpen = false"
@@ -119,6 +120,43 @@
         </form>
       </div>
     </UModal>
+    <UModal v-model="isCatEditOpen">
+      <div class="flex flex-col gap-5 p-5">
+        <h1 class="text-3xl font-bold">Rename</h1>
+        <form @submit.prevent="EditCatSubmit()">
+          <UInput
+            v-model="CatEditValue"
+            placeholder="Rename Category"
+            class="w-full"
+            required
+          />
+          <UButton label="save" class="w-full mt-5" type="submit" />
+        </form>
+      </div>
+    </UModal>
+    <UModal v-model="isCatDelOpen">
+      <div class="flex flex-col gap-5 p-5">
+        <h1 class="text-3xl font-bold">Delete Url</h1>
+        <div class="flex items-center w-full justify-end gap-5">
+          <UButton
+            label="Close"
+            class="mt-5"
+            type="button"
+            @click="isCatDelOpen = false"
+          />
+          <UButton
+            label="Delete"
+            class="mt-5"
+            type="button"
+            color="red"
+            variant="outline"
+            @click="
+              CatDelete()
+            "
+          />
+        </div>
+      </div>
+    </UModal>
     <!-- <pre>{{ BookCatStore.categoryData }}</pre> -->
     <!-- <pre>{{ UrlStore.urlData }}</pre> -->
   </div>
@@ -138,6 +176,10 @@ const isEditUrlOpen = ref(false);
 const isDelUrlOpen = ref(false);
 const urlValue = ref("");
 const urlValueId = ref("");
+const CatOptionID = ref("");
+const CatEditValue = ref("");
+const isCatEditOpen = ref(false);
+const isCatDelOpen = ref(false);
 
 const Copy = (text: string) => {
   copy(text);
@@ -162,10 +204,19 @@ const items = [
     {
       label: "Rename",
       icon: "tabler:edit-circle",
+      click: () => {
+        // console.log(CatOptionID.value);
+        isCatEditOpen.value = true;
+      },
     },
     {
       label: "Remove",
       icon: "tabler:trash-x",
+      click: () => {
+        isCatDelOpen.value = true;
+        // console.log(CatOptionID.value);
+        // BookCatStore.deleteBookmarkCategory(CatOptionID.value, currentPath);
+      },
     },
   ],
 ];
@@ -180,6 +231,17 @@ const EditUrlSubmit = () => {
   isEditUrlOpen.value = false;
   UrlStore.UpdateBookmarks(urlValueId.value, urlValue.value, currentPath);
 };
+
+const EditCatSubmit = () => {
+  isCatEditOpen.value = false;
+  BookCatStore.updateBookmarkCategory(CatOptionID.value, CatEditValue.value, currentPath);
+};
+
+const CatDelete = () => {
+  isCatDelOpen.value = false;
+  BookCatStore.deleteBookmarkCategory(CatOptionID.value, currentPath);
+};
+
 </script>
 
 <style>
