@@ -3,19 +3,18 @@ export const AddBookmarkCategory = async (
   path: string
 ) => {
   // console.log(categoryName, path);
-  await $fetch("/api/bookmark/category/addBookmarkCategory", {
-    method: "POST",
-    body: {
-      categoryName,
-      path,
-    },
-  })
-    .then(() => {
-      return true;
+  try {
+    await $fetch("/api/bookmark/category/addBookmarkCategory", {
+      method: "POST",
+      body: {
+        categoryName,
+        path,
+      },
     })
-    .catch((err) => {
-      return false;
-    });
+    return true
+  } catch(err) {
+    return false
+  };
 };
 
 export const GetBookmarkCategory = async (path: string) => {

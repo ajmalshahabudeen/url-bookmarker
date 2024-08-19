@@ -1,12 +1,13 @@
 <template>
-  <div>
+  <div class="w-full flex justify-center">
     <UContainer
       class="inline-flex gap-4 max-w-full overflow-x-auto no-scrollbar my-5"
     >
       <UButton
         variant="outline"
         icon="material-symbols:filter-alt-outline-sharp"
-        label="Filter"
+        :label="FilterStore.filter && FilterStore.filter"
+        @click="FilterStore.toggleFilter"
       />
       <UButton
         variant="outline"
@@ -30,14 +31,16 @@
 </template>
 
 <script lang="ts" setup>
-import {useGetBookmarksCategoryStore} from '~/stores/useGetBookmarksCategoryStore'
+import {useGetBookmarksCategoryStore} from '~/stores/useBookmarksCategoryStore'
 const BookCatStore = useGetBookmarksCategoryStore()
-
+const UrlStore = useUrlsStore()
+const FilterStore = useMyUseFilterStore()
 const route = useRoute()
 const path = route.path
 
 onMounted(() => {
   BookCatStore.getBookmarkCategory(path)
+  UrlStore.getBookmarkUrl(path)
 })
 
 const refresh = () => {
