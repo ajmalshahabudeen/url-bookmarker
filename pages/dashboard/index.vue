@@ -5,11 +5,16 @@
       class="p-5 md:p-20 flex flex-wrap gap-5"
       v-if="FilterStore.filter === 'category'"
     >
-      <p v-if="BookCatStore.categoryData.length === 0">No Categories yet</p>
+      <p v-if="BookCatStore.categoryData.length === 0 && !BookCatStore.loading">
+        No Categories yet
+      </p>
       <div v-if="BookCatStore.loading" class="flex flex-wrap gap-5">
         <USkeleton class="h-20 w-20 rounded-2xl" v-for="index in 3" />
       </div>
-      <div v-for="(Category, index) in BookCatStore.categoryData">
+      <div
+        v-for="(Category, index) in BookCatStore.categoryData"
+        class="flex flex-col gap-2 items-center"
+      >
         <NuxtLink :to="`${currentPath}/${Category.categoryName}`">
           <UButton
             :label="Category.categoryName"
@@ -18,13 +23,23 @@
             class="h-20 w-20 text-center text-xl rounded-tr-3xl"
           />
         </NuxtLink>
+        <UDropdown :items="items" :popper="{ placement: 'bottom-start' }">
+          <UButton
+            color="white"
+            label="Options"
+            variant="ghost"
+            trailing-icon="i-heroicons-chevron-down-20-solid"
+          />
+        </UDropdown>
       </div>
     </UContainer>
     <UContainer
       class="p-5 md:p-20 flex flex-col gap-5 md:gap-7 w-full"
       v-if="FilterStore.filter === 'url'"
     >
-      <p v-if="UrlStore.urlData.length === 0">No Urls yet</p>
+      <p v-if="UrlStore.urlData.length === 0 && !UrlStore.loading">
+        No Urls yet
+      </p>
       <div v-if="UrlStore.loading" class="flex flex-col gap-5">
         <USkeleton class="h-10 w-full rounded-2xl" v-for="index in 3" />
       </div>
@@ -52,16 +67,58 @@
             icon="tabler:copy"
             @click="Copy(Url.bookmarkedUrl)"
           />
-          <UButton label="edit" icon="tabler:edit" variant="outline" />
+          <UButton
+            label="edit"
+            icon="tabler:edit"
+            variant="outline"
+            @click="editButtonClicked(Url.id, Url.bookmarkedUrl)"
+          />
+
           <UButton
             label="remove"
             icon="tabler:trash"
             variant="outline"
             color="red"
+            @click="isDelUrlOpen = true"
           />
+          <UModal v-model="isDelUrlOpen">
+            <div class="flex flex-col gap-5 p-5">
+              <h1 class="text-3xl font-bold">Delete Url</h1>
+              <div class="flex items-center w-full justify-end gap-5">
+                <UButton
+                  label="Close" 
+                  class="mt-5"
+                  type="button"
+                  @click="isDelUrlOpen = false"
+                />
+                <UButton
+                  label="Delete"
+                  class="mt-5"
+                  type="button"
+                  color="red"
+                  variant="outline"
+                  @click="UrlStore.deleteBookmarkUrl(Url.id, currentPath)"
+                />
+              </div>
+            </div>
+          </UModal>
         </div>
       </div>
     </UContainer>
+    <UModal v-model="isEditUrlOpen">
+      <div class="flex flex-col gap-5 p-5">
+        <h1 class="text-3xl font-bold">Update Url</h1>
+        <form @submit.prevent="EditUrlSubmit()">
+          <UInput
+            v-model="urlValue"
+            placeholder="Update Url"
+            class="w-full"
+            required
+          />
+          <UButton label="save" class="w-full mt-5" type="submit" />
+        </form>
+      </div>
+    </UModal>
     <!-- <pre>{{ BookCatStore.categoryData }}</pre> -->
     <!-- <pre>{{ UrlStore.urlData }}</pre> -->
   </div>
@@ -77,12 +134,51 @@ const UrlStore = useUrlsStore();
 const route = useRoute();
 const currentPath = route.path;
 const toast = useToast();
+const isEditUrlOpen = ref(false);
+const isDelUrlOpen = ref(false);
+const urlValue = ref("");
+const urlValueId = ref("");
+
 const Copy = (text: string) => {
   copy(text);
   toast.add({ title: "copied!" });
 };
 const Visit = (url: string) => {
   navigateTo(url, { external: true, open: { target: "_blank" } });
+};
+
+UrlStore.$subscribe((mutation, state) => {
+  if (state.error) {
+    toast.add({
+      title: "Error",
+      description: "Something went wrong",
+      color: "red",
+    });
+  }
+});
+
+const items = [
+  [
+    {
+      label: "Rename",
+      icon: "tabler:edit-circle",
+    },
+    {
+      label: "Remove",
+      icon: "tabler:trash-x",
+    },
+  ],
+];
+
+const editButtonClicked = (id: string, url: string) => {
+  urlValue.value = url;
+  urlValueId.value = id;
+  isEditUrlOpen.value = true;
+};
+
+const EditUrlSubmit = () => {
+  isEditUrlOpen.value = false;
+  UrlStore.UpdateBookmarks(urlValueId.value, urlValue.value, currentPath);
 };
 </script>
 

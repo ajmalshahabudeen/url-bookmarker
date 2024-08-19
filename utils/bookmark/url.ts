@@ -31,3 +31,30 @@ export const GetBookmarks = async (path: string) => {
     return null;
   }
 };
+
+export const DeleteBookmarks = async (id: string) => {
+  // console.log(path);
+  try {
+    const data = await $fetch("/api/bookmark/urls/deleteBookmark?id=" + id, {
+      method: "DELETE",
+    });
+    return true;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const UpdateBookmarks = async (id: string, url: string) => {
+  // console.log(path);
+  try {
+    const data = await $fetch("/api/bookmark/urls/updateBookmark?id=" + id, {
+      method: "PUT",
+      body: {
+        url,
+      },
+    });
+    return true;
+  } catch (error) {
+    return null;
+  }
+};

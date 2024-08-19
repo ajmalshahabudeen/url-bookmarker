@@ -5,7 +5,7 @@
       class="p-5 md:p-20 flex flex-wrap gap-5"
       v-if="FilterStore.filter === 'category'"
     >
-      <p v-if="BookCatStore.categoryData.length === 0">No Categories yet</p>
+      <p v-if="BookCatStore.categoryData.length === 0 && !BookCatStore.loading">No Categories yet</p>
       <div v-if="BookCatStore.loading" class="flex flex-wrap gap-5">
         <USkeleton class="h-20 w-20 rounded-2xl" v-for="index in 3" />
       </div>
@@ -24,7 +24,7 @@
       class="p-5 md:p-20 flex flex-col gap-5 md:gap-7 w-full"
       v-if="FilterStore.filter === 'url'"
     >
-      <p v-if="UrlStore.urlData.length === 0">No Urls yet</p>
+      <p v-if="UrlStore.urlData.length === 0 && !UrlStore.loading">No Urls yet</p>
       <div v-if="UrlStore.loading" class="flex flex-col gap-5">
         <USkeleton class="h-10 w-full rounded-2xl" v-for="index in 3" />
       </div>

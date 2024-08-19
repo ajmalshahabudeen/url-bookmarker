@@ -80,6 +80,8 @@ const CatisOpen = ref(false)
 const newUrl = ref("")
 const catName = ref("")
 onMounted(() => {
+  BookCatStore.$reset()
+  UrlStore.$reset()
   BookCatStore.getBookmarkCategory(path)
   UrlStore.getBookmarkUrl(path)
 })

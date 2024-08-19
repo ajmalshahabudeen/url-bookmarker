@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { AddBookmarks, GetBookmarks } from '~/utils/bookmark/url';
+import { AddBookmarks, DeleteBookmarks, GetBookmarks, UpdateBookmarks } from '~/utils/bookmark/url';
 
 export const useUrlsStore = defineStore({
   id: 'useUrlsStore',
@@ -29,11 +29,30 @@ export const useUrlsStore = defineStore({
       const res = await AddBookmarks(categoryPath, bookmarkUrl);
       if (!res) {
         this.error = true;
+        this.loading = false;
         this.errorMessage = "Error adding bookmark url";
         return;
       }
       this.loading = false;
       this.getBookmarkUrl(categoryPath);
+    },
+    async deleteBookmarkUrl(id: string, path: string) {
+      const res = await DeleteBookmarks(id);
+      if (!res) {
+        this.error = true;
+        this.errorMessage = "Error deleting bookmark url";
+        return;
+      }
+      this.getBookmarkUrl(path);
+    },
+    async UpdateBookmarks(id: string, url: string, path: string) {
+      const res = await UpdateBookmarks(id, url);
+      if (!res) {
+        this.error = true;
+        this.errorMessage = "Error updating bookmark url";
+        return;
+      }
+      this.getBookmarkUrl(path);
     }
   }
 })
