@@ -98,6 +98,7 @@ const addUrlSubmit = () => {
 
 const addCatSubmit = () => {
   BookCatStore.addBookmarkCategory(catName.value, path)
+  CatisOpen.value = false
 }
 
 </script>
