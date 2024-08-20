@@ -15,7 +15,11 @@ export default defineEventHandler(async (event) => {
   }
   const pathArr = path.split("/");
   const categoryName = pathArr[pathArr.length - 1];
-  console.log(path);
+  let CatPath = pathArr.pop() && pathArr.join("/");
+  if (!CatPath) {
+    CatPath = "/dashboard";
+  }
+  console.log({ categoryName, pathArr, CatPath });
 
   // console.log(session)
 
@@ -42,7 +46,13 @@ export default defineEventHandler(async (event) => {
     const categoryID = await db
       .select({ id: bookmarkcategory.id })
       .from(bookmarkcategory)
-      .where(eq(bookmarkcategory.categoryPath, path));
+      .where(
+        and(
+          eq(bookmarkcategory.categoryName, categoryName),
+          eq(bookmarkcategory.categoryPath, CatPath),
+          eq(bookmarkcategory.userId, userID[0].id)
+        )
+      );
 
     const listOfBookmarks = await db.query.bookmark.findMany({
       where: and(

@@ -1,7 +1,7 @@
 import { getServerSession } from "#auth";
 import { bookmark, bookmarkcategory, user } from "~/drizzle/schema";
 import { db } from "~/utils/db";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 
 export default defineEventHandler(async (event) => {
   const session = await getServerSession(event);
@@ -17,7 +17,11 @@ export default defineEventHandler(async (event) => {
   categoryPath.endsWith("/") && pathArr.pop();
   const newCategoryPath = pathArr.join("/");
   const categoryName = pathArr[pathArr.length - 1];
-  // console.log({ categoryName, pathArr, newCategoryPath });
+  let CatPath = pathArr.pop() && pathArr.join("/");
+  if (!CatPath) {
+    CatPath = "/dashboard";
+  }
+  console.log({ categoryName, pathArr, newCategoryPath, CatPath });
   // console.log(session)
 
   let newBookmarkUrl = bookmarkUrl;
@@ -48,9 +52,15 @@ export default defineEventHandler(async (event) => {
     const categoryID = await db
       .select({ id: bookmarkcategory.id })
       .from(bookmarkcategory)
-      .where(eq(bookmarkcategory.categoryPath, newCategoryPath));
+      .where(
+        and(
+          eq(bookmarkcategory.categoryName, categoryName),
+          eq(bookmarkcategory.categoryPath, CatPath),
+          eq(bookmarkcategory.userId, userID[0].id)
+        )
+      ); //need to fix
 
-    console.log(categoryID);
+    console.log("categoryID", categoryID);
 
     if (!categoryID) {
       throw createError({
