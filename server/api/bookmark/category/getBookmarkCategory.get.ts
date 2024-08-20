@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
     const newPath = path.slice(0, -1);
     path = newPath;
   }
-  console.log(path);
+  // console.log(path);
 
   // console.log(session)
 

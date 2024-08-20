@@ -4,7 +4,13 @@
       class="inline-flex gap-4 max-w-full overflow-x-auto no-scrollbar my-5"
     >
       <UButton
-        variant="outline"
+        variant="ghost"
+        icon="tabler:arrow-back-up"
+        label="Back"
+        @click="router.back()"
+      />
+      <UButton
+        variant="soft"
         icon="material-symbols:filter-alt-outline-sharp"
         :label="FilterStore.filter && FilterStore.filter"
         @click="FilterStore.toggleFilter"
@@ -16,13 +22,13 @@
         @click="refresh"
       />
       <UButton
-        variant="outline"
+        variant="solid"
         icon="mdi:plus-circle-outline"
         label="Add Bookmark"
         @click="BookisOpen = true"
       />
       <UButton
-        variant="outline"
+        variant="solid"
         icon="mdi:plus-circle-outline"
         label="Add Category"
         @click="CatisOpen = true"
@@ -74,6 +80,7 @@ const BookCatStore = useGetBookmarksCategoryStore()
 const UrlStore = useUrlsStore()
 const FilterStore = useMyUseFilterStore()
 const route = useRoute()
+const router = useRouter()
 const path = route.path
 const BookisOpen = ref(false)
 const CatisOpen = ref(false)
