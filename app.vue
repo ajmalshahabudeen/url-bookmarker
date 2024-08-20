@@ -18,7 +18,7 @@ useSeoMeta({
   ogTitle: 'BookMarker',
   description: 'An awesome bookmark manager.',
   ogDescription: 'An awesome bookmark manager.',
-  ogImage: 'https://example.com/image.png',
+  ogImage: 'https://myurlbookmarker.vercel.app/bookmarker.png',
   twitterCard: 'summary_large_image',
 })
 
