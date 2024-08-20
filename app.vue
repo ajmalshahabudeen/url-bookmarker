@@ -20,6 +20,11 @@ useSeoMeta({
   ogDescription: 'An awesome bookmark manager.',
   ogImage: 'https://myurlbookmarker.vercel.app/bookmarker.png',
   twitterCard: 'summary_large_image',
+  twitterImage: 'https://myurlbookmarker.vercel.app/bookmarker.png',
+  author: 'Ajmal Shahabudeen',
+  publisher: 'Ajmal Shahabudeen',
+  googlebot: 'notranslate'
+  
 })
 
 </script>
