@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
   if (!CatPath) {
     CatPath = "/dashboard";
   }
-  // console.log({ categoryName, pathArr, CatPath });
+  console.log({ categoryName, pathArr, CatPath });
 
   // console.log(session)
 

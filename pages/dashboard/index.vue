@@ -20,7 +20,7 @@
             :label="Category.categoryName"
             :key="index"
             variant="outline"
-            class="h-20 w-20 text-center text-xl rounded-tr-3xl"
+            class="h-20 w-20 text-center text-xl rounded-tr-3xl overflow-y-auto text-nowrap no-scrollbar"
           />
         </NuxtLink>
         <UDropdown :items="items" :popper="{ placement: 'bottom-start' }">

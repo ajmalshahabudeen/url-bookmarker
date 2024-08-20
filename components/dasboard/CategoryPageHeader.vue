@@ -10,10 +10,22 @@
         @click="router.back()"
       />
       <UButton
+        variant="soft"
+        icon="material-symbols:filter-alt-outline-sharp"
+        :label="FilterStore.filter && FilterStore.filter"
+        @click="FilterStore.toggleFilter"
+      />
+      <UButton
         variant="outline"
         icon="material-symbols:refresh-rounded"
         label="Refresh"
         @click="refresh"
+      />
+      <UButton
+        variant="solid"
+        icon="mdi:plus-circle-outline"
+        label="Add Bookmark"
+        @click="BookisOpen = true"
       />
       <UButton
         variant="solid"
@@ -23,6 +35,24 @@
       />
       <!-- <p>{{ route.path }}</p> -->
     </UContainer>
+    <UModal v-model="BookisOpen">
+      <div class="flex flex-col gap-5 p-5">
+        <h1 class="text-3xl font-bold">Add Bookmark</h1>
+        <form @submit.prevent="addUrlSubmit">
+          <UInput
+            v-model="newUrl"
+            placeholder="new url"
+            class="w-full"
+            required
+          />
+          <UButton
+            label="Add to Bookmarks"
+            class="w-full mt-5"
+            type="submit"
+          />
+        </form>
+      </div>
+    </UModal>
     <UModal v-model="CatisOpen">
       <div class="flex flex-col gap-5 p-5">
         <h1 class="text-3xl font-bold">Add Category</h1>
@@ -47,19 +77,32 @@
 <script lang="ts" setup>
 import {useGetBookmarksCategoryStore} from '~/stores/useBookmarksCategoryStore'
 const BookCatStore = useGetBookmarksCategoryStore()
+const UrlStore = useUrlsStore()
+const FilterStore = useMyUseFilterStore()
 const route = useRoute()
 const router = useRouter()
 const path = route.path
+const BookisOpen = ref(false)
 const CatisOpen = ref(false)
+const newUrl = ref("")
 const catName = ref("")
 onMounted(() => {
   BookCatStore.$reset()
+  UrlStore.$reset()
   BookCatStore.getBookmarkCategory(path)
+  UrlStore.getBookmarkUrl(path)
 })
 
 const refresh = () => {
   BookCatStore.$reset()
   BookCatStore.getBookmarkCategory(path)
+  UrlStore.$reset()
+  UrlStore.getBookmarkUrl(path)
+}
+
+const addUrlSubmit = () => {
+  UrlStore.addBookmarkUrl(path, newUrl.value)
+  BookisOpen.value = false
 }
 
 const addCatSubmit = () => {

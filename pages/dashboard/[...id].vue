@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DashHeader />
+    <CategoryPageHeader />
     <UContainer
       class="p-5 md:p-20 flex flex-wrap gap-5"
       v-if="FilterStore.filter === 'category'"
@@ -20,7 +20,7 @@
             :label="Category.categoryName"
             :key="index"
             variant="outline"
-            class="h-20 w-20 text-center text-xl rounded-tr-3xl"
+            class="h-20 w-20 text-center text-xl rounded-tr-3xl overflow-y-auto text-nowrap no-scrollbar"
           />
         </NuxtLink>
         <UDropdown :items="items" :popper="{ placement: 'bottom-start' }">
@@ -164,7 +164,7 @@
 
 <script lang="ts" setup>
 import copy from "copy-to-clipboard";
-import DashHeader from "~/components/dasboard/DashHeader.vue";
+import CategoryPageHeader from "~/components/dasboard/CategoryPageHeader.vue";
 import { useGetBookmarksCategoryStore } from "~/stores/useBookmarksCategoryStore";
 const BookCatStore = useGetBookmarksCategoryStore();
 const FilterStore = useMyUseFilterStore();

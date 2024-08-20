@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
   if (!CatPath) {
     CatPath = "/dashboard";
   }
-  // console.log({ categoryName, pathArr, newCategoryPath, CatPath });
+  console.log({ categoryName, pathArr, newCategoryPath, CatPath });
   // console.log(session)
 
   let newBookmarkUrl = bookmarkUrl;
@@ -49,7 +49,7 @@ export default defineEventHandler(async (event) => {
         statusMessage: "User not found",
       });
     }
-    const categoryID = await db
+    let categoryID = await db
       .select({ id: bookmarkcategory.id })
       .from(bookmarkcategory)
       .where(
@@ -58,11 +58,11 @@ export default defineEventHandler(async (event) => {
           eq(bookmarkcategory.categoryPath, CatPath),
           eq(bookmarkcategory.userId, userID[0].id)
         )
-      ); //need to fix
+      );
 
-    // console.log("categoryID", categoryID);
+    console.log("categoryID", categoryID);
 
-    if (!categoryID) {
+    if (categoryID.length === 0) {
       throw createError({
         statusCode: 404,
         statusMessage: "Category not found",
