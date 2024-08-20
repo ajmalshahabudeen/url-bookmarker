@@ -75,7 +75,7 @@ const loading = ref(false);
 
 const handleLogin = async () => {
   loading.value = true;
-  console.log(userEmail.value, userPassword.value);
+  // console.log(userEmail.value, userPassword.value);
   const response = await signIn(
     "credentials",
     {
@@ -85,7 +85,7 @@ const handleLogin = async () => {
     },
     { callbackUrl: "/dashboard" }
   );
-  console.log(response);
+  // console.log(response);
   if (response?.error) {
     loading.value = false;
     error.value = true;

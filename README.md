@@ -77,6 +77,6 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 
 
 ## Need to Fix:-
-- Error output in toast --need to fix
+- Error output in toast --need to fix --fixed
 - renaming category need to update database --need to update category db
 - saving bookmarks are not working in categories --Problem with splitting up name and path to get database category id --fixed

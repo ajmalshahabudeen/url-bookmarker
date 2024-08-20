@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
   const { id } = query as { id: string };
   const { categoryName } = body as { categoryName: string };
   
-  console.log({ id });
+  // console.log({ id });
   // console.log(session)
 
   if (!session) {

@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
 
   const query = getQuery(event)
   const { id } = query as { id: string };
-  console.log({ id });
+  // console.log({ id });
   // console.log(session)
 
   if (!session) {

@@ -10,6 +10,7 @@ const items:any = [
       label: userEmail || "User",
       slot: "account",
       disabled: true,
+      class: "no-scrollbar w-full overflow-x-auto",
     },
   ],
   [
@@ -99,3 +100,9 @@ onMounted(() => {
     </template>
   </UDropdown>
 </template>
+
+<style>
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+</style>

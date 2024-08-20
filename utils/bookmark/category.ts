@@ -26,7 +26,7 @@ export const GetBookmarkCategory = async (path: string) => {
         method: "GET",
       }
     );
-    console.log(data);
+    // console.log(data);
     return data;
   } catch (error) {
     return null;

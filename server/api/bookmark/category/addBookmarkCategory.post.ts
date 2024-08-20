@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
 
   const body = await readBody(event);
   const { categoryName, path } = body as { categoryName: string; path: string };
-  console.log({ categoryName, path });
+  // console.log({ categoryName, path });
   // console.log(session)
 
   if (!session) {

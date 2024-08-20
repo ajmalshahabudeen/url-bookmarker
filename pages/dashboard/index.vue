@@ -37,6 +37,7 @@
       <div class="flex flex-col gap-5 p-5">
         <h1 class="text-3xl font-bold">Rename</h1>
         <form @submit.prevent="EditCatSubmit()">
+          <p class="text-sm text-orange-400 text-center pb-1">under development, may lose data</p>
           <UInput
             v-model="CatEditValue"
             placeholder="Rename Category"
