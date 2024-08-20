@@ -1,82 +1,19 @@
-# Nuxt 3 Minimal Starter
+# Bookmark Manager
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## Getting Started:-
+- clone the repo
+- install [bun](https://bun.sh) runtime (Recommended) or use npm
+- run `bun install`
+- run `bun dev` and visit http://localhost:3000
 
-## Setup
+### Tech Stack:-
+- [Nuxt](https://nuxt.com/) 
+- [Tailwind](https://tailwindcss.com/) 
+- [Pinia](https://pinia.vuejs.org/) 
+- [Pinia-plugin-persistedstate](https://prazdevs.github.io/pinia-plugin-persistedstate/frameworks/nuxt-3.html)
+- [Drizzle](https://orm.drizzle.team/)
+- [Auth](https://auth.sidebase.io/)
 
-Make sure to install the dependencies:
-
-```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
-
-
-
-## Need to Fix:-
-- Error output in toast --need to fix --fixed
+### Need to Fix:-
 - renaming category need to update database --need to update category db
-- saving bookmarks are not working in categories --Problem with splitting up name and path to get database category id --fixed
+- password reset
