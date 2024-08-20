@@ -25,6 +25,7 @@ export const useGetBookmarksCategoryStore = defineStore({
       this.loading = false;
     },
     async addBookmarkCategory(categoryName: string, path: string) {
+      this.categoryData = [] as CatData[];
       this.loading = true;
       const res = await AddBookmarkCategory(categoryName, path);
       if (!res) {
@@ -36,6 +37,8 @@ export const useGetBookmarksCategoryStore = defineStore({
       this.getBookmarkCategory(path);
     },
     async updateBookmarkCategory(id: string, categoryName: string, path: string) {
+      this.categoryData = [] as CatData[];
+      this.loading = true;
       const res = await UpdateBookmarkCategory(id, categoryName);
       if (!res) {
         this.error = true;
@@ -45,6 +48,8 @@ export const useGetBookmarksCategoryStore = defineStore({
       this.getBookmarkCategory(path);
     },
     async deleteBookmarkCategory(id: string, path: string) {
+      this.categoryData = [] as CatData[];
+      this.loading = true;
       const res = await DeleteBookmarkCategory(id);
       if (!res) {
         this.error = true;

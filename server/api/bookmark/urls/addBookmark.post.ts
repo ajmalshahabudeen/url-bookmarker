@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
   if (!CatPath) {
     CatPath = "/dashboard";
   }
-  console.log({ categoryName, pathArr, newCategoryPath, CatPath });
+  // console.log({ categoryName, pathArr, newCategoryPath, CatPath });
   // console.log(session)
 
   let newBookmarkUrl = bookmarkUrl;
@@ -60,7 +60,7 @@ export default defineEventHandler(async (event) => {
         )
       );
 
-    console.log("categoryID", categoryID);
+    // console.log("categoryID", categoryID);
 
     if (categoryID.length === 0) {
       throw createError({

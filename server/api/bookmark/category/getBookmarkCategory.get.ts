@@ -44,8 +44,8 @@ export default defineEventHandler(async (event) => {
         eq(bookmarkcategory.categoryPath, path)
       ),
     });
-    if (!listOfCategory) {
-      return "No category found";
+    if (listOfCategory.length === 0) {
+      return "";
     }
 
     return listOfCategory;

@@ -60,8 +60,8 @@ export default defineEventHandler(async (event) => {
         eq(bookmark.bookmarkedCategory, categoryID[0].id)
       ),
     });
-    if (!listOfBookmarks) {
-      return "No bookmarks found";
+    if (listOfBookmarks.length === 0) {
+      return "";
     }
     return listOfBookmarks;
     // throw createError({

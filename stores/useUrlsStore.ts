@@ -25,6 +25,7 @@ export const useUrlsStore = defineStore({
       this.loading = false;
     },
     async addBookmarkUrl(categoryPath: string, bookmarkUrl: string) {
+      this.urlData = [] as UrlData[];
       this.loading = true;
       const res = await AddBookmarks(categoryPath, bookmarkUrl);
       if (!res) {
@@ -37,6 +38,8 @@ export const useUrlsStore = defineStore({
       this.getBookmarkUrl(categoryPath);
     },
     async deleteBookmarkUrl(id: string, path: string) {
+      this.urlData = [] as UrlData[];
+      this.loading = true;
       const res = await DeleteBookmarks(id);
       if (!res) {
         this.error = true;
@@ -46,6 +49,8 @@ export const useUrlsStore = defineStore({
       this.getBookmarkUrl(path);
     },
     async UpdateBookmarks(id: string, url: string, path: string) {
+      this.urlData = [] as UrlData[];
+      this.loading = true;
       const res = await UpdateBookmarks(id, url);
       if (!res) {
         this.error = true;

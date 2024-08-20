@@ -189,15 +189,15 @@ const Visit = (url: string) => {
   navigateTo(url, { external: true, open: { target: "_blank" } });
 };
 
-// UrlStore.$subscribe((mutation, state) => {
-//   if (state.error) {
-//     toast.add({
-//       title: "Error",
-//       description: "Something went wrong",
-//       color: "red",
-//     });
-//   }
-// });
+UrlStore.$subscribe((mutation, state) => {
+  if (state.error) {
+    toast.add({
+      title: "Error",
+      description: "Something went wrong",
+      color: "red",
+    });
+  }
+});
 
 const items = [
   [

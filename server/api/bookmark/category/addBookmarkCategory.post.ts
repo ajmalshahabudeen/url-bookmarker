@@ -1,7 +1,7 @@
 import { getServerSession } from "#auth";
 import { bookmarkcategory, user } from "~/drizzle/schema";
 import { db } from "~/utils/db";
-import { eq } from "drizzle-orm";
+import { eq, and } from 'drizzle-orm';
 
 export default defineEventHandler(async (event) => {
   const session = await getServerSession(event);
@@ -31,6 +31,20 @@ export default defineEventHandler(async (event) => {
         statusCode: 404,
         statusMessage: "User not found",
       });
+    }
+
+    const CatExists = await db
+      .select({ id: bookmarkcategory.id })
+      .from(bookmarkcategory)
+      .where(
+        and(
+          eq(bookmarkcategory.categoryName, categoryName),
+          eq(bookmarkcategory.categoryPath, path),
+          eq(bookmarkcategory.userId, userID[0].id)
+        )
+      );
+    if (CatExists.length > 0) {
+      return CatExists[0].id;
     }
 
     const categoryID = await db
