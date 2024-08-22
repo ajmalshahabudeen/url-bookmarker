@@ -6,6 +6,7 @@ export const useUrlsStore = defineStore({
   state: () => {
     return {
       urlData: [] as UrlData[],
+      urlCount: 0,
       loading: false,
       error: false,
       errorMessage: "",
@@ -22,6 +23,7 @@ export const useUrlsStore = defineStore({
         return;
       }
       this.urlData = data as UrlData[];
+      this.urlCount = this.urlData.length;
       this.loading = false;
     },
     async addBookmarkUrl(categoryPath: string, bookmarkUrl: string) {

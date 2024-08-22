@@ -1,6 +1,13 @@
 <template>
   <div>
     <CategoryPageHeader />
+    <div class="flex justify-center">
+      <p class="px-1">{{ BookCatStore.categoryCount }}</p>
+      <Icon name="tabler:folder-open" size="1.5rem" />
+      <p class="px-4">|</p>
+      <p class="px-1">{{ UrlStore.urlCount }}</p>
+      <Icon name="tabler:bookmark" size="1.5rem" />
+    </div>
     <UContainer
       class="p-5 md:p-20 flex flex-wrap gap-5"
       v-if="FilterStore.filter === 'category'"
@@ -181,6 +188,7 @@ const CatOptionID = ref("");
 const CatEditValue = ref("");
 const isCatEditOpen = ref(false);
 const isCatDelOpen = ref(false);
+
 
 const Copy = (text: string) => {
   copy(text);

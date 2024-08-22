@@ -5,7 +5,11 @@ import { eq } from "drizzle-orm";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
-  const { name, email, password } = body;
+  const { name, email, password } = body as {
+    name: string;
+    email: string;
+    password: string;
+  };
   // console.log({ name, email, password });
   const hashedPassword = bcrypt.hashSync(password, 10);
 

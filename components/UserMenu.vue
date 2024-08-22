@@ -17,6 +17,7 @@ const items:any = [
     {
       label: "Settings",
       icon: "i-heroicons-cog-8-tooth",
+      to: "/settings",
     },
   ],
   [

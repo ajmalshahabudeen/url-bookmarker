@@ -1,11 +1,17 @@
 import { defineStore } from "pinia";
-import { AddBookmarkCategory, DeleteBookmarkCategory, GetBookmarkCategory, UpdateBookmarkCategory } from "~/utils/bookmark/category";
+import {
+  AddBookmarkCategory,
+  DeleteBookmarkCategory,
+  GetBookmarkCategory,
+  UpdateBookmarkCategory,
+} from "~/utils/bookmark/category";
 
 export const useGetBookmarksCategoryStore = defineStore({
   id: "useGetBookmarksCategoryStore",
   state: () => {
     return {
       categoryData: [] as CatData[],
+      categoryCount: 0,
       loading: false,
       error: false,
       errorMessage: "",
@@ -14,6 +20,7 @@ export const useGetBookmarksCategoryStore = defineStore({
   actions: {
     async getBookmarkCategory(path: string) {
       this.loading = true;
+      const FilterStore = useMyUseFilterStore();
       const data = await GetBookmarkCategory(path);
       if (data === null) {
         this.error = true;
@@ -22,6 +29,7 @@ export const useGetBookmarksCategoryStore = defineStore({
         return;
       }
       this.categoryData = data as CatData[];
+      this.categoryCount = this.categoryData.length;
       this.loading = false;
     },
     async addBookmarkCategory(categoryName: string, path: string) {
@@ -36,7 +44,11 @@ export const useGetBookmarksCategoryStore = defineStore({
       this.loading = false;
       this.getBookmarkCategory(path);
     },
-    async updateBookmarkCategory(id: string, categoryName: string, path: string) {
+    async updateBookmarkCategory(
+      id: string,
+      categoryName: string,
+      path: string
+    ) {
       this.categoryData = [] as CatData[];
       this.loading = true;
       const res = await UpdateBookmarkCategory(id, categoryName);
