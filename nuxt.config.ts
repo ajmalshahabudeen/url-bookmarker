@@ -47,7 +47,7 @@ export default defineNuxtConfig({
     name: 'BookMarker',
   },
   pwa: {
-    strategies: "injectManifest",
+    strategies: "generateSW",
     registerType: "autoUpdate",
     devOptions: {
       enabled: true,
