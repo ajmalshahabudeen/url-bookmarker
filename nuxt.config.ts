@@ -76,9 +76,7 @@ export default defineNuxtConfig({
         },
       ],
       lang: "en",
-      display: "fullscreen",
-      theme_color: "#ffffff",
-      background_color: "#000000",
+      display: "standalone",
     },
   }
 
