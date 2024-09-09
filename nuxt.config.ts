@@ -46,8 +46,5 @@ export default defineNuxtConfig({
     url: 'https://myurlbookmarker.vercel.app',
     name: 'BookMarker',
   },
-  pwa: {
-    
-  }
 
 });

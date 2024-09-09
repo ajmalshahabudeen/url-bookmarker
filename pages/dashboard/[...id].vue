@@ -258,9 +258,17 @@ const CatDelete = () => {
   display: none;
 }
 
+.custom-scrollbar::-webkit-scrollbar {
+  @media screen and (min-width: 768px) {
+    background-color: transparent;
+    border-radius: 10px;
+  }
+}
+
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background-color: transparent;
 }
+
 .custom-scrollbar:hover::-webkit-scrollbar-thumb {
   background-color: #73de81;
   border-radius: 10px;
