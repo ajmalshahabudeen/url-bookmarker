@@ -2,7 +2,7 @@
   <div>
     <DashHeader />
     <UContainer
-      class="p-5 md:p-20 flex flex-wrap gap-5"
+      class="p-5 md:p-20 flex flex-wrap gap-5 max-h-[80vh] overflow-y-auto custom-scrollbar"
     >
       <p v-if="BookCatStore.categoryData.length === 0 && !BookCatStore.loading">
         No Categories yet
@@ -138,4 +138,20 @@ const CatDelete = () => {
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+.custom-scrollbar::-webkit-scrollbar {
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+.custom-scrollbar:hover::-webkit-scrollbar-thumb {
+  background-color: #73de81;
+  border-radius: 10px;
+  border: 4px solid transparent;
+  background-clip: content-box;
+}
+
 </style>

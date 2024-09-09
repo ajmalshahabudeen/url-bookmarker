@@ -17,7 +17,8 @@ export default defineNuxtConfig({
     "@sidebase/nuxt-auth",
     "@pinia/nuxt",
     "@pinia-plugin-persistedstate/nuxt",
-    "@nuxtjs/sitemap"
+    "@nuxtjs/sitemap",
+    "@vite-pwa/nuxt",
   ],
   colorMode: {
     preference: "system", // default value of $colorMode.preference
@@ -45,5 +46,8 @@ export default defineNuxtConfig({
     url: 'https://myurlbookmarker.vercel.app',
     name: 'BookMarker',
   },
+  pwa: {
+    
+  }
 
 });

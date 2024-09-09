@@ -9,7 +9,7 @@
       <Icon name="tabler:bookmark" size="1.5rem" />
     </div>
     <UContainer
-      class="p-5 md:p-20 flex flex-wrap gap-5"
+      class="p-5 md:p-20 flex flex-wrap gap-5 max-h-[80vh] overflow-y-auto custom-scrollbar"
       v-if="FilterStore.filter === 'category'"
     >
       <p v-if="BookCatStore.categoryData.length === 0 && !BookCatStore.loading">
@@ -42,7 +42,7 @@
       </div>
     </UContainer>
     <UContainer
-      class="p-5 md:p-20 flex flex-col gap-5 md:gap-7 w-full"
+      class="p-5 md:p-20 flex flex-col gap-5 md:gap-7 w-full max-h-[80vh] overflow-y-auto custom-scrollbar"
       v-if="FilterStore.filter === 'url'"
     >
       <p v-if="UrlStore.urlData.length === 0 && !UrlStore.loading">
@@ -256,5 +256,15 @@ const CatDelete = () => {
 <style>
 .no-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+.custom-scrollbar:hover::-webkit-scrollbar-thumb {
+  background-color: #73de81;
+  border-radius: 10px;
+  border: 4px solid transparent;
+  background-clip: content-box;
 }
 </style>
