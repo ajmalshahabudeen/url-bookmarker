@@ -8,6 +8,7 @@
       <p class="px-1">{{ UrlStore.urlCount }}</p>
       <Icon name="tabler:bookmark" size="1.5rem" />
     </div>
+    <PageComponentViewAll />
     <UContainer
       class="p-5 md:p-20 flex flex-wrap gap-5 max-h-[80vh] overflow-y-auto custom-scrollbar"
       v-if="FilterStore.filter === 'category'"

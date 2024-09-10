@@ -17,8 +17,10 @@
       />
       <UButton 
         variant="outline"
-        icon=""
+        icon="ph:diamonds-four-thin"
         label="view all"
+        @click="FilterStore.setViewAll"
+        class="hidden lg:flex"
       />
       <UButton
         variant="outline"
