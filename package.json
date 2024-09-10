@@ -8,7 +8,8 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "generate-pwa-assets": "pwa-assets-generator --preset minimal-2023 public/logo.png"
+    "generate-pwa-assets": "pwa-assets-generator --preset minimal-2023 public/logo.png",
+    "restart": "rm -rf .nuxt && rm -rf node_modules && bun i && nuxt dev"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.4.2",

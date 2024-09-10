@@ -15,6 +15,11 @@
         :label="FilterStore.filter && FilterStore.filter"
         @click="FilterStore.toggleFilter"
       />
+      <UButton 
+        variant="outline"
+        icon=""
+        label="view all"
+      />
       <UButton
         variant="outline"
         icon="material-symbols:refresh-rounded"
