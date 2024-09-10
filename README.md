@@ -1,5 +1,16 @@
 # Bookmark Manager
 
+### Description:-
+- This is an simple bookmark manager.
+- You can add, edit, delete bookmarks.
+- You can save bookmarks in categories.
+- It has PWA support, So install it on your device.
+- It has authentication and password reset.
+
+<br/>
+
+### For Developers, How To Use:-
+
 ## Getting Started:-
 - clone the repo
 - install [bun](https://bun.sh) runtime (Recommended) or use npm
@@ -14,6 +25,6 @@
 - [Drizzle](https://orm.drizzle.team/)
 - [Auth](https://auth.sidebase.io/)
 
-### Need to Fix:-
+### Bugs to Fix:-
 - renaming category need to update database --need to update category db
-- password reset
+- password reset with email
