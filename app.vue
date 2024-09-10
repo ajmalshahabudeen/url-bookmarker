@@ -11,6 +11,7 @@ useHead({
   title: 'BookMarker',
   meta: [
     { name: 'description', content: 'An awesome bookmark manager.' },
+    { name: 'google-site-verification', content: 'XAIUyWxtFzt6NL3RTFDFpBWSyZ8unmcB94rtsvzC8fY' }
   ],
   htmlAttrs: {
     lang: 'en'
@@ -23,7 +24,7 @@ useHead({
     }
   ]
 })
-
+// <meta name="google-site-verification" content="XAIUyWxtFzt6NL3RTFDFpBWSyZ8unmcB94rtsvzC8fY" />
 useSeoMeta({
   title: 'BookMarker',
   ogTitle: 'BookMarker',
