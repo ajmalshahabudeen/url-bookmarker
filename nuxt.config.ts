@@ -50,7 +50,7 @@ export default defineNuxtConfig({
     strategies: "generateSW",
     registerType: "autoUpdate",
     devOptions: {
-      enabled: true,
+      enabled: false,
     },
     manifest: {
       name: "BookMarker",

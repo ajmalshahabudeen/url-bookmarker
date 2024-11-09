@@ -8,8 +8,8 @@ const props = defineProps({
 
 <template>
   <div class="flex flex-col gap-5 items-center justify-center min-h-[90vh]">
-    <h1 class="text-5xl font-matemasie">{{ error.statusCode }}</h1>
-    <p class="text-xl">{{ error.message }}</p>
+    <h1 class="text-5xl font-matemasie">{{ (error as any).statusCode }}</h1>
+    <p class="text-xl max-w-[50vw] overflow-x-auto">{{ (error as any).message }}</p>
     <NuxtLink to="/">
       <UButton label="Go Back" size="xl" variant="outline" />
     </NuxtLink>

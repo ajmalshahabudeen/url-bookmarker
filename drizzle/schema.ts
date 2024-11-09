@@ -1,12 +1,20 @@
-import { pgTable, foreignKey, text, timestamp, unique, primaryKey, integer, boolean } from "drizzle-orm/pg-core"
+import { pgTable, text, unique, timestamp, foreignKey, primaryKey, integer, boolean } from "drizzle-orm/pg-core"
   import { sql } from "drizzle-orm"
 
 
 
-export const session = pgTable("session", {
-	sessionToken: text("sessionToken").primaryKey().notNull(),
-	userId: text("userId").notNull().references(() => user.id, { onDelete: "cascade" } ),
-	expires: timestamp("expires", { mode: 'string' }).notNull(),
+export const bookmark = pgTable("bookmark", {
+	id: text("id").primaryKey().notNull(),
+	userId: text("user_id").notNull(),
+	bookmarkedCategory: text("bookmarked_category"),
+	bookmarkedUrl: text("bookmarked_url"),
+});
+
+export const bookmarkcategory = pgTable("bookmarkcategory", {
+	id: text("id").primaryKey().notNull(),
+	categoryName: text("category_name"),
+	categoryPath: text("category_path"),
+	userId: text("user_id"),
 });
 
 export const user = pgTable("user", {
@@ -23,18 +31,10 @@ export const user = pgTable("user", {
 	}
 });
 
-export const bookmark = pgTable("bookmark", {
-	id: text("id").primaryKey().notNull(),
-	userId: text("user_id").notNull(),
-	bookmarkedCategory: text("bookmarked_category"),
-	bookmarkedUrl: text("bookmarked_url"),
-});
-
-export const bookmarkcategory = pgTable("bookmarkcategory", {
-	id: text("id").primaryKey().notNull(),
-	categoryName: text("category_name"),
-	categoryPath: text("category_path"),
-	userId: text("user_id"),
+export const session = pgTable("session", {
+	sessionToken: text("sessionToken").primaryKey().notNull(),
+	userId: text("userId").notNull().references(() => user.id, { onDelete: "cascade" } ),
+	expires: timestamp("expires", { mode: 'string' }).notNull(),
 });
 
 export const verificationToken = pgTable("verificationToken", {

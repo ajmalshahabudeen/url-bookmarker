@@ -7,3 +7,17 @@
         @apply font-poppins;
     }
 }
+
+::-webkit-scrollbar {
+    @media screen and (min-width: 768px) {
+        background-color: transparent;
+        border-radius: 10px;
+    }
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #73de81;
+    border-radius: 10px;
+    border: 4px solid transparent;
+    background-clip: content-box;
+}

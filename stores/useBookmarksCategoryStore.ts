@@ -43,6 +43,8 @@ export const useGetBookmarksCategoryStore = defineStore({
       }
       this.loading = false;
       this.getBookmarkCategory(path);
+      const Path = useFilePathStore();
+      Path.getAllPaths();
     },
     async updateBookmarkCategory(
       id: string,
@@ -69,6 +71,8 @@ export const useGetBookmarksCategoryStore = defineStore({
         return;
       }
       this.getBookmarkCategory(path);
+      const Path = useFilePathStore();
+      Path.getAllPaths();
     },
   },
   persist: true,

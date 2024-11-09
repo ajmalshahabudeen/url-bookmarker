@@ -1,5 +1,5 @@
 <template>
-  <div v-if="FilterStore.viewAll">
+  <div v-if="FilterStore.viewAll" class="w-full">
     <div class="flex flex-row gap-5 mx-10 pt-5">
       <UContainer
         class="w-1/2 p-5 md:p-20 flex flex-wrap gap-10 max-h-[80vh] overflow-y-auto custom-scrollbar"
