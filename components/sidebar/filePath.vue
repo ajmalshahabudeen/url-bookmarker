@@ -1,7 +1,7 @@
 <template>
     <div>
         <UCard
-            class="border border-primary min-w-[15vw] max-h-[80vh] overflow-y-auto custom-scrollbar">
+            class="border border-primary min-w-[15vw] max-h-[75vh] overflow-y-auto custom-scrollbar">
             <!-- <p v-for="path in Path.filePaths">
               {{ path.categoryName }}
             </p> -->
