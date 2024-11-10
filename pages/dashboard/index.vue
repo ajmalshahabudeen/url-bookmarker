@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="w-full flex flex-col" >
         <DashHeader />
-        <UContainer class="flex md:flex-row md:gap-5 md:mx-10 p-0 ">
+        <div class="flex md:flex-row md:gap-5 md:mx-10 p-0">
           <FilePath class="hidden md:block"/>
           <UContainer
             class="p-5 md:p-20 flex flex-wrap gap-5 max-h-[80vh] overflow-y-auto custom-scrollbar">
@@ -37,7 +37,7 @@
                 </UDropdown>
             </div>
         </UContainer>
-        </UContainer>
+        </div>
         <UModal v-model="isCatEditOpen">
             <div class="flex flex-col gap-5 p-5">
                 <h1 class="text-3xl font-bold">Rename</h1>
